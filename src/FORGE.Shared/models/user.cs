@@ -1,4 +1,4 @@
-namespace FORGE.Shared.models;
+namespace FORGE.Shared.Models;
 
 public class User
 {
