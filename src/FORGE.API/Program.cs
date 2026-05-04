@@ -20,7 +20,7 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> CreateUser(User user)
     {
         _db.Users.Add(user); // Add is NOT async
-        await _db.SaveChangesAsync(); // THIS is async
+        await _db.SaveChangesAsync(); 
         return Ok(user);
     }
 
