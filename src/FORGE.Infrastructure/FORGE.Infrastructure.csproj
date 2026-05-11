@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FORGE.Shared\FORGE.Shared.csproj" />
+    <ProjectReference Include="..\FORGE.Core\FORGE.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
