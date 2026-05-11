@@ -11,5 +11,8 @@ obj/
 .DS_Store
 Thumbs.db
 
+# Local database
+src/FORGE.API/forge.db
+
 # Plan
 implementation_plan.md

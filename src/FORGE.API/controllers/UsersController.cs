@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using FORGE.Infrastructure.Data;
 using FORGE.Shared.Models;
 
@@ -16,15 +17,15 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost]
-    public async IActionResult CreateUser(User user)
+    public async Task<IActionResult> CreateUser(User user)
     {
-        await _db.Users.Add(user);
-        await _db.SaveChanges();
+        _db.Users.Add(user);
+        await _db.SaveChangesAsync();
         return Ok(user);
     }
 
     [HttpGet]
-    public async IActionResult GetUsers()
+    public async Task<IActionResult> GetUsers()
     {
         return Ok(await _db.Users.ToListAsync());
     }
