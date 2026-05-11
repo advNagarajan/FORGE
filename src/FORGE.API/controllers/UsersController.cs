@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using FORGE.Infrastructure.Data;
+using FORGE.Core.Repositories;
 using FORGE.Shared.Models;
 
 namespace FORGE.API.Controllers;
@@ -9,24 +8,24 @@ namespace FORGE.API.Controllers;
 [Route("api/[controller]")]
 public class UsersController : ControllerBase
 {
-    private readonly ForgeDbContext _db;
+    private readonly IRepository<User> _userRepository;
 
-    public UsersController(ForgeDbContext db)
+    public UsersController(IRepository<User> userRepository)
     {
-        _db = db;
+        _userRepository = userRepository;
     }
 
     [HttpPost]
     public async Task<IActionResult> CreateUser(User user)
     {
-        _db.Users.Add(user);
-        await _db.SaveChangesAsync();
+        await _userRepository.AddAsync(user);
         return Ok(user);
     }
 
     [HttpGet]
     public async Task<IActionResult> GetUsers()
     {
-        return Ok(await _db.Users.ToListAsync());
+        var users = await _userRepository.GetAllAsync();
+        return Ok(users);
     }
 }

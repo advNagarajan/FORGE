@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using FORGE.Infrastructure.Data;
+using FORGE.Core.Repositories;
+using FORGE.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ForgeDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection") ?? "Data Source=forge.db"));
+
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 var app = builder.Build();
 
